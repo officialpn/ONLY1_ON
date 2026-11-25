@@ -1,12 +1,17 @@
 services:
   - type: web
     name: html-decoder-bot
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    env: python
+    buildCommand: pip install -r requirements.txt && PLAYWRIGHT_BROWSERS_PATH=./.playwright playwright install --with-deps chromium
+    startCommand: python main.py
     envVars:
       - key: BOT_TOKEN
         sync: false
       - key: OWNER_ID
         sync: false
       - key: OWNER_USERNAME
-        sync: false
+        value: PR4MOD_H4X
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PLAYWRIGHT_BROWSERS_PATH
+        value: ./.playwright
